@@ -1,0 +1,21 @@
+{
+  "name": "rhinoblox",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^7.1.2"
+  },
+  "dependencies": {
+    "@blockly/field-colour": "^6.0.6",
+    "@blockly/field-colour-hsv-sliders": "^6.0.6",
+    "@blockly/workspace-minimap": "^0.3.3",
+    "blockly": "^12.3.1",
+    "chroma-js": "^3.1.2"
+  }
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RhinoBlox</title>
+  <!-- RhinoBlox 3.0 by AblazeMuffin35 -->
+</head>
+<body style="opacity: 0">
+  <div id="popup-container">
+    <div id="about-popup" class="generic-popup">
+      <div class="generic-popup-top-bar">About RhinoBlox</div>
+      <div class="generic-popup-content" style="text-align: center; overflow-y: auto;">
+        <img src="src/assets/rhinoblox_logo.png" height="100px" style="-webkit-user-drag: none; user-select: none;">
+        <p class="about-popup-paragraph">
+          <span style="font-weight: 600;">Versions</span><br>
+          RhinoBlox Version: 3.0 (Early-Access)<br>
+          Blockly Version: 12.3.1<br>
+        </p>
+        <p class="about-popup-paragraph">
+          <span style="font-weight: 600;">Author</span><br>
+          AblazeMuffin35
+        </p>
+        <p class="about-popup-paragraph">
+          <span style="font-weight: 600;">Rhinus Games Supporters</span><br>
+          ItalianYeney1,<br>
+          Polaradian,<br>
+          Tech72Wizard,<br>
+          Page
+        </p>
+        <p class="about-popup-paragraph">
+          <span style="font-weight: 600;">Special Thanks</span><br>
+          Blockly,<br>
+          Chroma.js<br>
+        </p>
+        <p class="about-popup-paragraph">
+          <span style="font-weight: 600;">License</span><br>
+          GNU GPLv3
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div id="top-bar">
+    <img src="src/assets/rhinoblox_logo.png"><div class="top-bar-spacer"></div><span id="aboutButton">About</span>
+    <span style="float: right;" id="saveButton">Save</span><span style="float: right;" id="loadButton">Load</span>
+  </div>
+
+  <div id="container">
+    <div id="blocklyArea"><div id="blocklyDiv" style="width: 100px; height: 100px"></div></div>
+
+    <div id="output">
+      <div id="controls">
+        <button id="playButton" class="controlButton">
+          <img src="src/assets/play_button.svg" height="25px"></button><button id="stopButton" class="controlButton">
+            <img src="src/assets/stop_button.svg" height="25px"></button>
+      </div>
+      <div id="outputConsole"></div>
+    </div>
+  </div>
+
+  <script type="module" src="src/main.js"></script>
+  <script type="module" src="src/generation.js"></script>
+</body>
+</html>
