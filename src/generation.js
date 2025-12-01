@@ -98,3 +98,25 @@ javascriptGenerator.forBlock['color_get'] = function(block, generator) {
   const code = 'chroma(' + value_color + ').get("' + dropdown_type + '")';
   return [code, Order.NONE];
 }
+
+javascriptGenerator.forBlock['console_log_color'] = function(block, generator) {
+  const value_text = generator.valueToCode(block, 'TEXT', Order.ATOMIC);
+  const value_color = generator.valueToCode(block, 'COLOR', Order.ATOMIC);
+  const code = 'rhinobloxConsoleFunctions.logColor(' + value_text + ', ' + value_color + ');\n';
+  return code;
+}
+
+javascriptGenerator.forBlock['console_get'] = function(block, generator) {
+  const code = 'rhinobloxConsoleFunctions.get()';
+  return [code, Order.NONE];
+}
+
+javascriptGenerator.forBlock['custom_loop_for'] = function(block, generator) {
+  const text_variable = block.getFieldValue('VARIABLE');
+  const value_start = generator.valueToCode(block, 'START', Order.ATOMIC);
+  const value_end = generator.valueToCode(block, 'END', Order.ATOMIC);
+  const value_next = generator.valueToCode(block, 'NEXT', Order.ATOMIC);
+  const statement_name = generator.statementToCode(block, 'NAME');
+  const code = 'for (rhinobloxVariables["' + text_variable + '"] = ' + value_start + '; rhinobloxVariables["' + text_variable + '"] <= ' + value_end + '; rhinobloxVariables["' + text_variable + '"] += ' + value_next + ') {\n' + statement_name + '}\n';
+  return code;
+}

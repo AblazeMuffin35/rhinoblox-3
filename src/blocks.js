@@ -3,7 +3,7 @@ const blocks = [
   "type": "custom_variable_set",
   "tooltip": "",
   "helpUrl": "",
-  "message0": "set %1 to %2",
+  "message0": "set variable %1 to %2",
   "args0": [
     {
       "type": "field_input",
@@ -23,7 +23,7 @@ const blocks = [
   "type": "custom_variable_get",
   "tooltip": "",
   "helpUrl": "",
-  "message0": "get %1 %2",
+  "message0": "variable %1 %2",
   "args0": [
     {
       "type": "field_input",
@@ -376,6 +376,76 @@ const blocks = [
   ],
   "output": null,
   "colour": "#673267"
+},
+{
+  "type": "console_log_color",
+  "tooltip": "",
+  "helpUrl": "",
+  "message0": "log %1 to console in color %2",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "TEXT"
+    },
+    {
+      "type": "input_value",
+      "name": "COLOR"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": "#674432",
+  "inputsInline": true
+},
+{
+  "type": "console_get",
+  "tooltip": "",
+  "helpUrl": "",
+  "message0": "console as list %1",
+  "args0": [
+    {
+      "type": "input_dummy",
+      "name": "DUMMY"
+    }
+  ],
+  "output": null,
+  "colour": "#674432"
+},
+{
+  "type": "custom_loop_for",
+  "tooltip": "",
+  "helpUrl": "",
+  "message0": "count with variable %1 from %2 to %3 by %4 do %5",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "VARIABLE",
+      "text": "var"
+    },
+    {
+      "type": "input_value",
+      "name": "START",
+      "check": "Number"
+    },
+    {
+      "type": "input_value",
+      "name": "END",
+      "check": "Number"
+    },
+    {
+      "type": "input_value",
+      "name": "NEXT",
+      "check": "Number"
+    },
+    {
+      "type": "input_statement",
+      "name": "NAME"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": "#26734c",
+  "inputsInline": true
 }
 ];
 

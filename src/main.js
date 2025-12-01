@@ -16,6 +16,7 @@ import { rhinobloxDarkTheme } from './themes.js';
 // Set locale to English
 Blockly.setLocale(En);
 
+// Load blocks
 Blockly.common.defineBlocksWithJsonArray(blocks);
 
 // Create workspace
@@ -42,15 +43,15 @@ const workspace = Blockly.inject('blocklyDiv', {
     media: 'src/blockly_media/',
 });
 
-window.workspace = workspace;
-window.Blockly = Blockly;
-
+// Create minimap
 const minimap = new Minimap(workspace);
 minimap.init();
 minimap.disableFocusRegion();
 
+// Register colour field
 registerFieldColour();
 
+// Resize blockly
 const resizeBlockly = function(e) {
     let element = blocklyArea;
     let x = 0;
@@ -66,32 +67,32 @@ const resizeBlockly = function(e) {
     blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
     Blockly.svgResize(workspace);
 };
-
 window.addEventListener('resize', resizeBlockly);
-
 resizeBlockly();
 
+// Play and stop button
 document.getElementById('playButton').addEventListener('click', function() {
     const code = javascriptGenerator.workspaceToCode(workspace);
     setupBeforeStarting();
     try {
+        console.log(code);
         eval(code);
     } catch (e) {
         rhinobloxConsoleFunctions.logError(e);
     }
 });
-
 document.getElementById('stopButton').addEventListener('click', function() {
     setupBeforeStarting();
 });
-
 function setupBeforeStarting() {
     window.rhinobloxVariables = {};
     rhinobloxConsoleFunctions.clear();
 }
 
+// Disable orphan blocks
 workspace.addChangeListener(Blockly.Events.disableOrphans);
 
+// Create start block
 let startBlock = workspace.newBlock('program_start');
 startBlock.initSvg();
 startBlock.render();
@@ -99,6 +100,7 @@ startBlock.setDeletable(false);
 startBlock.snapToGrid();
 workspace.centerOnBlock(startBlock.id);
 
+// Console functions
 const rhinobloxConsole = document.getElementById('outputConsole');
 const rhinobloxConsoleFunctions = {
     log: function(text) {
@@ -118,11 +120,25 @@ const rhinobloxConsoleFunctions = {
         span.style.color = '#FFD230';
         rhinobloxConsole.appendChild(span);
     },
+    logColor: function(text, color) {
+        let span = document.createElement('span');
+        span.innerText += text + '\n';
+        span.style.color = color;
+        rhinobloxConsole.appendChild(span);
+    },
     clear: function() {
         rhinobloxConsole.innerHTML = '';
+    },
+    get: function() {
+        let output = [];
+        rhinobloxConsole.childNodes.forEach((node) => {
+            output.push(node.innerText.trim());
+        });
+        return output;
     }
 };
 
+// File functions
 function downloadFile(filename, content, type = "text/plain") {
     const blob = new Blob([content], { type });
     const url = URL.createObjectURL(blob);
@@ -151,8 +167,8 @@ function openFileDialog({ multiple = false, accept = "*/*" } = {}) {
     });
 }
 
+// Project functions
 const versionBlacklist = [];
-
 const rhinobloxProjectFunctions = {
     save: function(title) {
         const data = Blockly.serialization.workspaces.save(workspace);
@@ -192,6 +208,7 @@ const rhinobloxProjectFunctions = {
     }
 };
 
+// Popup functions
 const rhinobloxPopupFunctions = {
     openAbout: function() {
         document.getElementById('popup-container').style.display = 'flex';
@@ -201,39 +218,41 @@ const rhinobloxPopupFunctions = {
         document.getElementById('popup-container').style.display = 'none';
         document.getElementById('about-popup').style.display = 'none';
     }
-}
+};
+rhinobloxPopupFunctions.closeAllPopups();
 
+// Global variables
+window.workspace = workspace;
+window.Blockly = Blockly;
 window.rhinobloxConsole = rhinobloxConsole;
 window.rhinobloxConsoleFunctions = rhinobloxConsoleFunctions;
 window.rhinobloxProjectFunctions = rhinobloxProjectFunctions;
 window.chroma = chroma;
 
+// Event listeners
 document.getElementById('saveButton').addEventListener('click', function() {
     rhinobloxProjectFunctions.save("project");
 });
-
 document.getElementById('loadButton').addEventListener('click', function() {
     rhinobloxProjectFunctions.load();
 });
-
-setupBeforeStarting();
-
-rhinobloxPopupFunctions.closeAllPopups();
-
 document.getElementById('aboutButton').addEventListener('click', function() {
     rhinobloxPopupFunctions.openAbout();
 });
-
 document.getElementById('popup-container').addEventListener('click', function() {
     rhinobloxPopupFunctions.closeAllPopups();
 });
-
 document.getElementById('about-popup').addEventListener('click', function(event) {
     event.stopPropagation();
 });
 
+// Reset variables
+setupBeforeStarting();
+
+// Show page
 document.body.style.opacity = 1;
 
+// Clear console
 setTimeout(() => {
     console.clear();
 }, 500);

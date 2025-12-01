@@ -1,3 +1,5 @@
+import { inputs } from "blockly";
+
 const toolbox = {
   kind: 'categoryToolbox',
   contents: [
@@ -25,6 +27,36 @@ const toolbox = {
           kind: 'block',
           fields: {
             MODE: 'WHILE',
+          },
+        },
+        {
+          type: 'custom_loop_for',
+          kind: 'block',
+          inputs: {
+            START: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 1,
+                },
+              },
+            },
+            END: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 10,
+                },
+              },
+            },
+            NEXT: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 1,
+                },
+              },
+            },
           },
         },
         {
@@ -783,6 +815,10 @@ const toolbox = {
       categorystyle: 'console_category',
       contents: [
         {
+          type: 'console_get',
+          kind: 'block',
+        },
+        {
           type: 'console_clear',
           kind: 'block',
         },
@@ -796,6 +832,28 @@ const toolbox = {
                 fields: {
                   TEXT: 'Hello!',
                 },
+              },
+            },
+          },
+        },
+        {
+          type: 'console_log_color',
+          kind: 'block',
+          inputs: {
+            TEXT: {
+              shadow: {
+                type: 'text',
+                fields: {
+                  TEXT: 'Hello!',
+                },
+              },
+            },
+            COLOR: {
+              shadow: {
+                type: 'color_select',
+                fields: {
+                  COLOR: '#ff00ff',
+                }
               },
             },
           },
