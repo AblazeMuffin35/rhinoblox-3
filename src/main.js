@@ -40,7 +40,7 @@ const workspace = Blockly.inject('blocklyDiv', {
     trashcan: true,
     renderer: 'zelos',
     theme: rhinobloxDarkTheme,
-    media: 'public/blockly_media/',
+    media: '/blockly_media/',
 });
 
 // Create minimap
