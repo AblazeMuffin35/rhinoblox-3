@@ -1,11 +1,11 @@
 @font-face {
     font-family: 'Rubik';
-    src: url('src/assets/rubik_font.ttf');
+    src: url('/assets/rubik_font.ttf');
 }
 
 @font-face {
     font-family: 'JetBrains Mono';
-    src: url('src/assets/jetbrains_mono_font.ttf');
+    src: url('/assets/jetbrains_mono_font.ttf');
 }
 
 *:focus {

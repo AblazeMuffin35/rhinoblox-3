@@ -99,7 +99,7 @@ const blocks = [
   "args0": [
     {
       "type": "field_image",
-      "src": "src/assets/play_button.svg",
+      "src": "/assets/play_button.svg",
       "height": 20,
       "width": 20,
       "alt": "",
