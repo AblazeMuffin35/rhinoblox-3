@@ -60,12 +60,13 @@ const toolbox = {
           },
         },
         {
-          type: 'controls_flow_statements',
-          kind: 'block',
-          fields: {
-            FLOW: 'BREAK',
-          },
+          type: 'program_loop',
+          kind: 'block'
         },
+        {
+          type: 'program_start',
+          kind: 'block'
+        }
       ],
     },
     {
@@ -811,53 +812,310 @@ const toolbox = {
     },
     {
       kind: 'category',
-      name: 'Console',
-      categorystyle: 'console_category',
+      name: 'Input / Output',
+      categorystyle: 'input_category',
       contents: [
         {
-          type: 'console_get',
-          kind: 'block',
+          type: 'input_mouse_x',
+          kind: 'block'
         },
         {
-          type: 'console_clear',
-          kind: 'block',
+          type: 'input_mouse_y',
+          kind: 'block'
         },
         {
-          type: 'console_log',
+          type: 'input_mouse_button_press',
+          kind: 'block'
+        },
+        {
+          type: 'input_mouse_button_last',
+          kind: 'block'
+        },
+        {
+          type: 'input_key_press',
+          kind: 'block'
+        },
+        {
+          type: 'input_key_last',
+          kind: 'block'
+        },
+        {
+          kind: 'sep',
+          gap: 50,
+        },
+        {
+          type: 'input_get_delta_time',
+          kind: 'block'
+        },
+        {
+          type: 'input_get_current_fps',
+          kind: 'block'
+        },
+        {
+          type: 'input_get_target_fps',
+          kind: 'block'
+        },
+        {
+          type: 'input_set_target_fps',
           kind: 'block',
           inputs: {
-            TEXT: {
+            FRAMERATE: {
               shadow: {
-                type: 'text',
+                type: 'math_number',
                 fields: {
-                  TEXT: 'Hello!',
+                  NUM: 120,
+                },
+              },
+            },
+          },
+        },
+      ]
+    },
+    {
+      kind: 'category',
+      name: 'Graphics',
+      categorystyle: 'graphics_category',
+      contents: [
+        {
+          type: 'graphics_clear',
+          kind: 'block',
+          inputs: {
+          COLOR: {
+            shadow: {
+              type: 'color_select',
+              fields: {
+                COLOR: '#000000',
+              }
+            },
+          },
+          }
+        },
+        {
+          type: 'graphics_fill',
+          kind: 'block',
+          inputs: {
+          COLOR: {
+            shadow: {
+              type: 'color_select',
+              fields: {
+                COLOR: '#ff00ff',
+              }
+            },
+          },
+          }
+        },
+        {
+          type: 'graphics_stroke',
+          kind: 'block',
+          inputs: {
+          COLOR: {
+            shadow: {
+              type: 'color_select',
+              fields: {
+                COLOR: '#ff00ff',
+              }
+            },
+          },
+          }
+        },
+        {
+          type: 'graphics_weight',
+          kind: 'block',
+          inputs: {
+            WEIGHT: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 5,
                 },
               },
             },
           },
         },
         {
-          type: 'console_log_color',
+          type: 'graphics_draw_rect',
           kind: 'block',
           inputs: {
-            TEXT: {
+            START_X: {
               shadow: {
-                type: 'text',
+                type: 'math_number',
                 fields: {
-                  TEXT: 'Hello!',
+                  NUM: 0,
                 },
               },
             },
-            COLOR: {
+            START_Y: {
               shadow: {
-                type: 'color_select',
+                type: 'math_number',
                 fields: {
-                  COLOR: '#ff00ff',
-                }
+                  NUM: 0,
+                },
+              },
+            },
+            END_X: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 100,
+                },
+              },
+            },
+            END_Y: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 100,
+                },
+              },
+            },
+            RADIUS: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 0,
+                },
               },
             },
           },
-        }
+        },
+        {
+          type: 'graphics_draw_ellipse',
+          kind: 'block',
+          inputs: {
+            START_X: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 0,
+                },
+              },
+            },
+            START_Y: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 0,
+                },
+              },
+            },
+            END_X: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 100,
+                },
+              },
+            },
+            END_Y: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 100,
+                },
+              },
+            }
+          },
+        },
+        {
+          type: 'graphics_draw_capsule',
+          kind: 'block',
+          inputs: {
+            START_X: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 0,
+                },
+              },
+            },
+            START_Y: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 0,
+                },
+              },
+            },
+            END_X: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 0,
+                },
+              },
+            },
+            END_Y: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 50,
+                },
+              },
+            },
+            RADIUS: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 25,
+                },
+              },
+            },
+          },
+        },
+        {
+          type: 'graphics_draw_triangle',
+          kind: 'block',
+          inputs: {
+            X1: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 0,
+                },
+              },
+            },
+            Y1: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 0,
+                },
+              },
+            },
+            X2: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: -50,
+                },
+              },
+            },
+            Y2: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 50,
+                },
+              },
+            },
+            X3: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 50,
+                },
+              },
+            },
+            Y3: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 50,
+                },
+              },
+            }
+          },
+        },
       ]
     },
   ],

@@ -8,6 +8,13 @@
     src: url('/assets/jetbrains_mono_font.ttf');
 }
 
+:root {
+    --dark0: #030712;
+    --dark1: #101828;
+    --dark2: #1E2939;
+    --dark3: #364153;
+}
+
 *:focus {
     outline: none;
 }
@@ -16,7 +23,7 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #101828;
+    background-color: var(--dark1);
     color: white;
     font-family: 'Rubik', sans-serif;
     font-size: 18px;
@@ -40,7 +47,7 @@ body {
 
 .generic-popup {
     position: relative;
-    background-color: #101828;
+    background-color: var(--dark1);
     border-radius: 10px;
     overflow: hidden;
 
@@ -53,7 +60,7 @@ body {
     left: 0;
     right: 0;
     height: 40px;
-    background-color: #1E2939;
+    background-color: var(--dark2);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -81,7 +88,7 @@ body {
 #top-bar {
     width: 100%;
     height: 60px;
-    background-color: #1E2939;
+    background-color: var(--dark2);
     overflow: hidden;
 }
 
@@ -104,37 +111,92 @@ body {
 }
 
 #top-bar span:hover {
-    background-color: #364153;
+    background-color: var(--dark3);
 }
 
 #blocklyArea {
-    width: 65%;
+    width: 70%;
     height: calc(100vh - 60px);
     float: left;
 }
 
-#output {
-    width: 35%;
-    height: 100vh;
+#outputArea {
+    width: 30%;
+    height: calc(100vh - 60px);
     float: left;
+    background-color: var(--dark0);
 }
 
-#controls {
-    width: 100%;
-    height: 40px;
+#startButton {
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px;
+
+    background-color: #26734c;
+    color: white;
+    font-size: 14px;
+    font-family: 'Rubik', sans-serif;
+    cursor: pointer;
+
+    transition: background-color 0.1s ease-in-out;
 }
 
-#outputConsole {
+#startButton:hover {
+    background-color: #339866;
+}
+
+#outputArea pre {
+    margin: 0 5px;
+    padding: 0;
+
     width: calc(100% - 10px);
-    height: calc(100% - 110px);
-    background-color: #030712;
-    font-family: 'JetBrains Mono', monospace;
-    padding: 5px;
+    height: calc(100vh - 60px);
+
     overflow-y: auto;
+    overflow-x: hidden;
+    word-break: normal !important;
+    word-wrap: normal !important;
+    white-space: pre-wrap !important;
+}
+
+#generatedCode {
+    height: 100%;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
 }
 
 .blocklyMainBackground {
     stroke: none;
+}
+
+.blocklyToolbox {
+    width: 130px;
+    padding: 0;
+}
+
+.blocklyToolboxCategoryLabel {
+    padding: 0;
+    margin-left: 8px;
+    font-family: 'Rubik', sans-serif;
+    font-size: 14px;
+}
+
+.blocklyToolboxCategory {
+    margin: 0;
+    padding: 5px;
+    border-radius: 8px;
+    line-height: 20px;
+}
+
+.blocklyToolboxCategory:not(.blocklyToolboxSelected):hover {
+    background-color: var(--dark3);
+}
+
+.customToolboxCategory {
+    margin: 2px;
+    border: 2px solid var(--dark1);
+    border-radius: 10px;
 }
 
 .controlButton {
@@ -142,6 +204,8 @@ body {
     display: inline-flex;
     justify-content: center;
     align-items: center;
+    padding: 0;
+    margin: 5px;
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -160,17 +224,31 @@ body {
 .blockly-minimap {
   position: absolute;
   box-shadow: none;
-  border: solid #030712 2px;
+  border: solid var(--dark0) 2px;
   border-radius: 10px;
   overflow: hidden;
   width: 200px;
   height: 150px;
   top: 80px;
-  right: calc(35% + 20px);
+  right: calc(30% + 20px);
+}
+
+.blocklyDisabledPattern>.blocklyPath {
+    fill: transparent;
+    fill-opacity: 1;
+    stroke-opacity: 1;
+}
+
+.zelos-renderer.rhinoblox_dark-theme
+.blocklyDisabledPattern > .blocklyOutlinePath {
+    fill: transparent;
+    fill-opacity: 1;
+    stroke-opacity: 1;
 }
 
 ::-webkit-scrollbar {
     width: 10px;
+    height: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -178,5 +256,5 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #1E2939;
+    background-color: var(--dark2);
 }

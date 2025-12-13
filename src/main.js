@@ -2,22 +2,29 @@ import './style.css';
 
 import * as Blockly from "blockly/core";
 import "blockly/blocks";
-import {registerFieldColour, FieldColour} from '@blockly/field-colour';
+import { registerFieldColour } from '@blockly/field-colour';
 import '@blockly/field-colour-hsv-sliders';
-import chroma from 'chroma-js';
-import {javascriptGenerator} from 'blockly/javascript';
+import { javascriptGenerator } from 'blockly/javascript';
 import * as En from "blockly/msg/en";
-
 import { blocks } from './blocks.js';
 import { toolbox } from './toolbox.js';
 import { Minimap } from '@blockly/workspace-minimap';
 import { rhinobloxDarkTheme } from './themes.js';
+import { CustomCategory } from './custom_category.js';
+
+import hljs from 'highlight.js';
+import 'highlight.js/styles/github-dark.css';
+
+import js_beautify from 'js-beautify';
 
 // Set locale to English
 Blockly.setLocale(En);
 
 // Load blocks
 Blockly.common.defineBlocksWithJsonArray(blocks);
+
+// Register custom category
+Blockly.registry.register(Blockly.registry.Type.TOOLBOX_ITEM, Blockly.ToolboxCategory.registrationName, CustomCategory, true);
 
 // Create workspace
 const workspace = Blockly.inject('blocklyDiv', {
@@ -41,6 +48,10 @@ const workspace = Blockly.inject('blocklyDiv', {
     renderer: 'zelos',
     theme: rhinobloxDarkTheme,
     media: '/blockly_media/',
+    maxInstances: {
+        'program_start': 1,
+        'program_loop': 1
+    }
 });
 
 // Create minimap
@@ -70,25 +81,6 @@ const resizeBlockly = function(e) {
 window.addEventListener('resize', resizeBlockly);
 resizeBlockly();
 
-// Play and stop button
-document.getElementById('playButton').addEventListener('click', function() {
-    const code = javascriptGenerator.workspaceToCode(workspace);
-    setupBeforeStarting();
-    try {
-        console.log(code);
-        eval(code);
-    } catch (e) {
-        rhinobloxConsoleFunctions.logError(e);
-    }
-});
-document.getElementById('stopButton').addEventListener('click', function() {
-    setupBeforeStarting();
-});
-function setupBeforeStarting() {
-    window.rhinobloxVariables = {};
-    rhinobloxConsoleFunctions.clear();
-}
-
 // Disable orphan blocks
 workspace.addChangeListener(Blockly.Events.disableOrphans);
 
@@ -96,47 +88,8 @@ workspace.addChangeListener(Blockly.Events.disableOrphans);
 let startBlock = workspace.newBlock('program_start');
 startBlock.initSvg();
 startBlock.render();
-startBlock.setDeletable(false);
 startBlock.snapToGrid();
 workspace.centerOnBlock(startBlock.id);
-
-// Console functions
-const rhinobloxConsole = document.getElementById('outputConsole');
-const rhinobloxConsoleFunctions = {
-    log: function(text) {
-        let span = document.createElement('span');
-        span.innerText += text + '\n';
-        rhinobloxConsole.appendChild(span);
-    },
-    logError: function(text) {
-        let span = document.createElement('span');
-        span.innerText += '[Error] ' + text + '\n';
-        span.style.color = '#FB2C36';
-        rhinobloxConsole.appendChild(span);
-    },
-    logWarning: function(text) {
-        let span = document.createElement('span');
-        span.innerText += '[Warning] ' + text + '\n';
-        span.style.color = '#FFD230';
-        rhinobloxConsole.appendChild(span);
-    },
-    logColor: function(text, color) {
-        let span = document.createElement('span');
-        span.innerText += text + '\n';
-        span.style.color = color;
-        rhinobloxConsole.appendChild(span);
-    },
-    clear: function() {
-        rhinobloxConsole.innerHTML = '';
-    },
-    get: function() {
-        let output = [];
-        rhinobloxConsole.childNodes.forEach((node) => {
-            output.push(node.innerText.trim());
-        });
-        return output;
-    }
-};
 
 // File functions
 function downloadFile(filename, content, type = "text/plain") {
@@ -168,13 +121,12 @@ function openFileDialog({ multiple = false, accept = "*/*" } = {}) {
 }
 
 // Project functions
-const versionBlacklist = [];
 const rhinobloxProjectFunctions = {
     save: function(title) {
         const data = Blockly.serialization.workspaces.save(workspace);
         const rhinobloxData = {
             editor: "RhinoBlox",
-            version: "3.0",
+            version: "3.1",
             title: title,
             data: data
         };
@@ -188,19 +140,10 @@ const rhinobloxProjectFunctions = {
             reader.onload = function() {
                 const data = JSON.parse(reader.result);
 
-                setupBeforeStarting();
-
                 if (data.editor == "RhinoBlox") {
-                    if (versionBlacklist.includes(data.version)) {
-                        rhinobloxConsoleFunctions.logWarning("The uploaded project is not compatible with this version of RhinoBlox.");
-                    } else {
-                        Blockly.Events.disable();
-                        workspace.clear();
-                        Blockly.Events.enable();
-                        Blockly.serialization.workspaces.load(data.data, workspace);
-                    }
+                    Blockly.serialization.workspaces.load(data.data, workspace);
                 } else {
-                    rhinobloxConsoleFunctions.logWarning("The uploaded file is not a RhinoBlox project.");
+                    alert("The uploaded file isn't a RhinoBlox project!");
                 }
             };
             reader.readAsText(file);
@@ -221,14 +164,6 @@ const rhinobloxPopupFunctions = {
 };
 rhinobloxPopupFunctions.closeAllPopups();
 
-// Global variables
-window.workspace = workspace;
-window.Blockly = Blockly;
-window.rhinobloxConsole = rhinobloxConsole;
-window.rhinobloxConsoleFunctions = rhinobloxConsoleFunctions;
-window.rhinobloxProjectFunctions = rhinobloxProjectFunctions;
-window.chroma = chroma;
-
 // Event listeners
 document.getElementById('saveButton').addEventListener('click', function() {
     rhinobloxProjectFunctions.save("project");
@@ -246,13 +181,86 @@ document.getElementById('about-popup').addEventListener('click', function(event)
     event.stopPropagation();
 });
 
-// Reset variables
-setupBeforeStarting();
+// Website launch
+let programWindow = null;
+const launchWebsite = function() {
+    const javascriptCode = js_beautify(javascriptGenerator.workspaceToCode(workspace), { indent_size: 4, indent_level: 0 });
+
+    const htmlCode = `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>RhinoBlox</title>
+
+        <script src="https://q5js.org/q5.js"></script>
+    </head>
+    <body style="margin: 0; padding: 0; overflow: hidden; background-color: black;" oncontextmenu="return false;">
+    <script type="module">
+        import chroma from 'https://cdn.jsdelivr.net/npm/chroma-js@3.2.0/+esm';
+        window.chroma = chroma;
+    </script>
+    <script>
+        let rhinobloxVariables = {};
+        let rhinobloxStart = () => {};
+        let rhinobloxUpdate = () => {};
+
+        Q5.WebGPU();
+        function setup() {
+            createCanvas(800, 600);
+            displayMode(MAXED, SMOOTH);
+            background("white");
+            frameRate(120);
+            rectMode(CORNERS);
+            ellipseMode(CORNERS);
+
+            ${javascriptCode}
+
+            rhinobloxStart();
+            q5.draw = () => {
+                rhinobloxUpdate();
+            }
+        }
+    </script>
+    </body>
+    </html>
+    `;
+
+    if (programWindow != null) {
+        programWindow.close();
+    }
+
+    const blob = new Blob([htmlCode], { type: "text/html" });
+    const url = URL.createObjectURL(blob);
+    programWindow = window.open(url, "_blank", "width=800,height=600");
+
+    programWindow.addEventListener("load", () => {
+        URL.revokeObjectURL(url);
+    });
+}
+
+// Start button
+document.getElementById('playButton').addEventListener('click', launchWebsite);
+
+// Stop button
+document.getElementById('stopButton').addEventListener('click', function() {
+    if (programWindow != null) {
+        programWindow.close();
+    }
+});
+
+// Code generation
+workspace.addChangeListener(() => {
+    const javascriptCode = js_beautify(javascriptGenerator.workspaceToCode(workspace), { indent_size: 4, indent_level: 0 });
+    document.getElementById('generatedCode').innerHTML = hljs.highlight(javascriptCode, { language: 'javascript' }).value;
+});
+
+// Global variables
+window.workspace = workspace;
+window.Blockly = Blockly;
+window.rhinobloxProjectFunctions = rhinobloxProjectFunctions;
+window.launchWebsite = launchWebsite;
 
 // Show page
 document.body.style.opacity = 1;
-
-// Clear console
-setTimeout(() => {
-    console.clear();
-}, 500);

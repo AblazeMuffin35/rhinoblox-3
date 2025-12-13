@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="assets/rhinoblox_icon.svg">
   <title>RhinoBlox</title>
-  <!-- RhinoBlox 3.0 by AblazeMuffin35 -->
+  <!-- RhinoBlox 3.1 by AblazeMuffin35 -->
 </head>
 <body style="opacity: 0">
   <div id="popup-container">
@@ -14,7 +15,7 @@
         <img src="assets/rhinoblox_logo.png" height="100px" style="-webkit-user-drag: none; user-select: none;">
         <p class="about-popup-paragraph">
           <span style="font-weight: 600;">Versions</span><br>
-          RhinoBlox Version: 3.0<br>
+          RhinoBlox Version: 3.1<br>
           Blockly Version: 12.3.1<br>
         </p>
         <p class="about-popup-paragraph">
@@ -31,7 +32,8 @@
         <p class="about-popup-paragraph">
           <span style="font-weight: 600;">Special Thanks</span><br>
           Blockly,<br>
-          Chroma.js<br>
+          Chroma.js,<br>
+          q5.js
         </p>
         <p class="about-popup-paragraph">
           <span style="font-weight: 600;">License</span><br>
@@ -47,18 +49,19 @@
   </div>
 
   <div id="container">
-    <div id="blocklyArea"><div id="blocklyDiv" style="width: 100px; height: 100px"></div></div>
+    <div id="blocklyArea">
+      <div id="blocklyDiv" style="width: 100px; height: 100px"></div>
+    </div>
 
-    <div id="output">
+    <div id="outputArea">
       <div id="controls">
-        <button id="playButton" class="controlButton">
-          <img src="/assets/play_button.svg" height="25px"></button><button id="stopButton" class="controlButton">
-            <img src="/assets/stop_button.svg" height="25px"></button>
+        <button id="playButton" class="controlButton"><img src="/assets/play_button.svg" height="25px"></button><button id="stopButton" class="controlButton"><img src="/assets/stop_button.svg" height="25px"></button>
       </div>
-      <div id="outputConsole"></div>
+      <pre><code id="generatedCode"><code/></pre>
     </div>
   </div>
-
+  
+  <script type="module" src="src/custom_category.js"></script>
   <script type="module" src="src/main.js"></script>
   <script type="module" src="src/generation.js"></script>
 </body>

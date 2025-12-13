@@ -61,6 +61,12 @@ const rhinobloxDarkTheme = Blockly.Theme.defineTheme('rhinoblox_dark', {
       },
       'custom_color_category': {
         'colour': '#673267'
+      },
+      'graphics_category': {
+        'colour': '#74683e'
+      },
+      'input_category': {
+        'colour': '#67743e'
       }
     }
  });
