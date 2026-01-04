@@ -1,14 +1,10 @@
-import { inputs } from "blockly";
-
 const toolbox = {
   kind: 'categoryToolbox',
-  contents: [
-    {
+  contents: [{
       kind: 'category',
       name: 'Loops',
       categorystyle: 'loop_category',
-      contents: [
-        {
+      contents: [{
           type: 'controls_repeat_ext',
           kind: 'block',
           inputs: {
@@ -73,8 +69,7 @@ const toolbox = {
       kind: 'category',
       name: 'Logic',
       categorystyle: 'logic_category',
-      contents: [
-        {
+      contents: [{
           type: 'controls_if',
           kind: 'block',
         },
@@ -104,6 +99,20 @@ const toolbox = {
           },
         },
         {
+          type: 'logic_chance',
+          kind: 'block',
+          inputs: {
+            PERCENT: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 50,
+                },
+              },
+            },
+          },
+        },
+        {
           type: 'logic_ternary',
           kind: 'block',
         },
@@ -113,8 +122,7 @@ const toolbox = {
       kind: 'category',
       name: 'Math',
       categorystyle: 'math_category',
-      contents: [
-        {
+      contents: [{
           type: 'math_number',
           kind: 'block',
           fields: {
@@ -328,14 +336,43 @@ const toolbox = {
             },
           },
         },
+        {
+          type: 'math_lerp',
+          kind: 'block',
+          inputs: {
+            FROM: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 0,
+                },
+              },
+            },
+            TO: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 100,
+                },
+              },
+            },
+            WITH: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 0.5,
+                },
+              },
+            }
+          }
+        }
       ],
     },
     {
       kind: 'category',
       name: 'Text',
       categorystyle: 'text_category',
-      contents: [
-        {
+      contents: [{
           type: 'text',
           kind: 'block',
           fields: {
@@ -540,8 +577,7 @@ const toolbox = {
       kind: 'category',
       name: 'Lists',
       categorystyle: 'list_category',
-      contents: [
-        {
+      contents: [{
           type: 'lists_create_with',
           kind: 'block',
         },
@@ -676,8 +712,7 @@ const toolbox = {
       kind: 'category',
       name: 'Colors',
       categorystyle: 'custom_color_category',
-      contents: [
-        {
+      contents: [{
           type: 'color_select',
           kind: 'block'
         },
@@ -787,8 +822,7 @@ const toolbox = {
       kind: 'category',
       name: 'Variables',
       categorystyle: 'custom_var_category',
-      contents: [
-        {
+      contents: [{
           type: 'custom_variable_get',
           kind: 'block'
         },
@@ -814,7 +848,40 @@ const toolbox = {
       kind: 'category',
       name: 'Input / Output',
       categorystyle: 'input_category',
-      contents: [
+      contents: [{
+          type: 'input_canvas_width',
+          kind: 'block'
+        },
+        {
+          type: 'input_canvas_height',
+          kind: 'block'
+        },
+        {
+          type: 'input_resize_program',
+          kind: 'block',
+          inputs: {
+            WIDTH: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 400,
+                },
+              },
+            },
+            HEIGHT: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 300,
+                },
+              },
+            },
+          },
+        },
+        {
+          kind: 'sep',
+          gap: 50,
+        },
         {
           type: 'input_mouse_x',
           kind: 'block'
@@ -875,47 +942,46 @@ const toolbox = {
       kind: 'category',
       name: 'Graphics',
       categorystyle: 'graphics_category',
-      contents: [
-        {
+      contents: [{
           type: 'graphics_clear',
           kind: 'block',
           inputs: {
-          COLOR: {
-            shadow: {
-              type: 'color_select',
-              fields: {
-                COLOR: '#000000',
-              }
+            COLOR: {
+              shadow: {
+                type: 'color_select',
+                fields: {
+                  COLOR: '#000000',
+                }
+              },
             },
-          },
           }
         },
         {
           type: 'graphics_fill',
           kind: 'block',
           inputs: {
-          COLOR: {
-            shadow: {
-              type: 'color_select',
-              fields: {
-                COLOR: '#ff00ff',
-              }
+            COLOR: {
+              shadow: {
+                type: 'color_select',
+                fields: {
+                  COLOR: '#ff00ff',
+                }
+              },
             },
-          },
           }
         },
         {
           type: 'graphics_stroke',
           kind: 'block',
           inputs: {
-          COLOR: {
-            shadow: {
-              type: 'color_select',
-              fields: {
-                COLOR: '#ff00ff',
-              }
+            COLOR: {
+              shadow: {
+                type: 'color_select',
+                fields: {
+                  COLOR: '#ff00ff',
+                }
+              },
             },
-          },
           }
         },
         {
@@ -931,6 +997,50 @@ const toolbox = {
               },
             },
           },
+        },
+        {
+          type: 'graphics_disable_fill',
+          kind: 'block',
+        },
+        {
+          type: 'graphics_disable_stroke',
+          kind: 'block',
+        },
+        {
+          kind: 'sep',
+          gap: 50,
+        },
+        {
+          type: 'graphics_set_font_family',
+          kind: 'block',
+          inputs: {
+            FAMILY: {
+              shadow: {
+                type: 'text',
+                fields: {
+                  TEXT: 'sans-serif',
+                },
+              },
+            },
+          }
+        },
+        {
+          type: 'graphics_set_font_size',
+          kind: 'block',
+          inputs: {
+            SIZE: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 25,
+                },
+              },
+            },
+          },
+        },
+        {
+          kind: 'sep',
+          gap: 50,
         },
         {
           type: 'graphics_draw_rect',
@@ -1116,8 +1226,302 @@ const toolbox = {
             }
           },
         },
+        {
+          type: 'graphics_draw_image',
+          kind: 'block',
+          inputs: {
+            IMAGE: {
+              block: {
+                type: 'custom_variable_get',
+                fields: {
+                  VARIABLE: 'image',
+                },
+              },
+            },
+            X1: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 0,
+                },
+              },
+            },
+            Y1: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 0,
+                },
+              },
+            },
+            X2: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 100,
+                },
+              },
+            },
+            Y2: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 100,
+                },
+              },
+            }
+          },
+        },
+        {
+          type: 'graphics_draw_text',
+          kind: 'block',
+          inputs: {
+            TEXT: {
+              shadow: {
+                type: 'text',
+                fields: {
+                  TEXT: '',
+                },
+              },
+            },
+            X: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 0,
+                },
+              },
+            },
+            Y: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 0,
+                },
+              },
+            }
+          }
+        },
+        {
+          kind: 'sep',
+          gap: 50,
+        },
+        {
+          type: 'graphics_rotate',
+          kind: 'block',
+          inputs: {
+            DEGREES: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 45,
+                },
+              },
+            },
+          }
+        },
+        {
+          type: 'graphics_skew',
+          kind: 'block',
+          inputs: {
+            DEGREES: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 45,
+                },
+              },
+            },
+          }
+        }
       ]
     },
+    {
+      kind: 'category',
+      name: 'Images',
+      categorystyle: 'image_category',
+      contents: [{
+          type: 'image_from_url',
+          kind: 'block',
+          inputs: {
+            URL: {
+              shadow: {
+                type: 'text',
+                fields: {
+                  TEXT: '',
+                },
+              },
+            },
+          },
+        },
+        {
+          type: 'image_copy',
+          kind: 'block',
+          inputs: {
+            IMAGE: {
+              block: {
+                type: 'custom_variable_get',
+                fields: {
+                  VARIABLE: 'image',
+                },
+              },
+            },
+          },
+        },
+        {
+          type: 'image_new_image',
+          kind: 'block',
+          inputs: {
+            WIDTH: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 100,
+                },
+              },
+            },
+            HEIGHT: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 100,
+                },
+              },
+            },
+          },
+        },
+        {
+          type: 'image_from_text',
+          kind: 'block',
+          inputs: {
+            TEXT: {
+              shadow: {
+                type: 'text',
+                fields: {
+                  TEXT: '',
+                },
+              },
+            },
+          }
+        },
+        {
+          kind: 'sep',
+          gap: 50,
+        },
+        {
+          type: 'image_get_pixel',
+          kind: 'block',
+          inputs: {
+            IMAGE: {
+              block: {
+                type: 'custom_variable_get',
+                fields: {
+                  VARIABLE: 'image',
+                },
+              },
+            },
+            X: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 0,
+                },
+              },
+            },
+            Y: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 0,
+                },
+              },
+            },
+          },
+        },
+        {
+          type: 'image_set_pixel',
+          kind: 'block',
+          inputs: {
+            IMAGE: {
+              block: {
+                type: 'custom_variable_get',
+                fields: {
+                  VARIABLE: 'image',
+                },
+              },
+            },
+            X: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 0,
+                },
+              },
+            },
+            Y: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 0,
+                },
+              },
+            },
+            COLOR: {
+              shadow: {
+                type: 'color_select',
+                fields: {
+                  COLOR: '#000000',
+                }
+              },
+            },
+          },
+        },
+        {
+          type: 'image_apply_filter',
+          kind: 'block',
+          inputs: {
+            IMAGE: {
+              block: {
+                type: 'custom_variable_get',
+                fields: {
+                  VARIABLE: 'image',
+                },
+              },
+            },
+            VALUE: {
+              shadow: {
+                type: 'math_number',
+                fields: {
+                  NUM: 0,
+                },
+              },
+            },
+          },
+        },
+        {
+          type: 'image_apply_css_filter',
+          kind: 'block',
+          inputs: {
+            IMAGE: {
+              block: {
+                type: 'custom_variable_get',
+                fields: {
+                  VARIABLE: 'image',
+                },
+              },
+            },
+            CSS: {
+              shadow: {
+                type: 'text',
+                  fields: {
+                    TEXT: '',
+                  },
+                },
+              },
+          },
+        },
+      ]
+    }
   ],
 };
 

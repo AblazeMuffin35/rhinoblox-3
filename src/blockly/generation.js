@@ -36,13 +36,13 @@ javascriptGenerator.forBlock['custom_variable_function'] = function(block, gener
 
 javascriptGenerator.forBlock['program_start'] = function(block, generator) {
   const statement_code = generator.statementToCode(block, 'CODE');
-  const code = 'rhinobloxStart = () => {\n' + statement_code + '};\n';
+  const code = 'rhinobloxStart = async () => {\n' + statement_code + '};\n';
   return code;
 }
 
 javascriptGenerator.forBlock['program_loop'] = function(block, generator) {
   const statement_code = generator.statementToCode(block, 'CODE');
-  const code = 'rhinobloxUpdate = () => {\n' + statement_code + '};\n';
+  const code = 'rhinobloxUpdate = async () => {\n' + statement_code + '};\n';
   return code;
 }
 
@@ -226,4 +226,147 @@ javascriptGenerator.forBlock['input_get_current_fps'] = function() {
 javascriptGenerator.forBlock['input_get_delta_time'] = function() {
   const code = 'deltaTime';
   return [code, Order.NONE];
+}
+
+javascriptGenerator.forBlock['image_from_url'] = function(block, generator) {
+  const value_url = generator.valueToCode(block, 'URL', Order.ATOMIC);
+  const code = 'await loadImage(' + value_url + ')';
+  return [code, Order.NONE];
+}
+
+javascriptGenerator.forBlock['graphics_draw_image'] = function(block, generator) {
+  const value_image = generator.valueToCode(block, 'IMAGE', Order.ATOMIC);
+  const value_x1 = generator.valueToCode(block, 'X1', Order.ATOMIC);
+  const value_y1 = generator.valueToCode(block, 'Y1', Order.ATOMIC);
+  const value_x2 = generator.valueToCode(block, 'X2', Order.ATOMIC);
+  const value_y2 = generator.valueToCode(block, 'Y2', Order.ATOMIC);
+  const code = 'image(' + value_image + ', ' + value_x1 + ', ' + value_y1 + ', ' + value_x2 + ', ' + value_y2 + ');\n';
+  return code;
+}
+
+javascriptGenerator.forBlock['image_new_image'] = function(block, generator) {
+  const value_width = generator.valueToCode(block, 'WIDTH', Order.ATOMIC);
+  const value_height = generator.valueToCode(block, 'HEIGHT', Order.ATOMIC);
+  const code = 'createImage(' + value_width + ', ' + value_height + ')';
+  return [code, Order.NONE];
+}
+
+javascriptGenerator.forBlock['image_get_pixel'] = function(block, generator) {
+  const value_image = generator.valueToCode(block, 'IMAGE', Order.ATOMIC);
+  const value_x = generator.valueToCode(block, 'X', Order.ATOMIC);
+  const value_y = generator.valueToCode(block, 'Y', Order.ATOMIC);
+  const code = 'customImageGet(' + value_image + ', ' + value_x + ', ' + value_y + ')';
+  return [code, Order.NONE];
+}
+
+javascriptGenerator.forBlock['image_set_pixel'] = function(block, generator) {
+  const value_image = generator.valueToCode(block, 'IMAGE', Order.ATOMIC);
+  const value_x = generator.valueToCode(block, 'X', Order.ATOMIC);
+  const value_y = generator.valueToCode(block, 'Y', Order.ATOMIC);
+  const value_color = generator.valueToCode(block, 'COLOR', Order.ATOMIC);
+  const code = 'customImageSet(' + value_image + ', ' + value_x + ', ' + value_y + ', ' + value_color + ');\n';
+  return code;
+}
+
+javascriptGenerator.forBlock['image_apply_filter'] = function(block, generator) {
+  const dropdown_filter = block.getFieldValue('FILTER');
+  const value_value = generator.valueToCode(block, 'VALUE', Order.ATOMIC);
+  const value_image = generator.valueToCode(block, 'IMAGE', Order.ATOMIC);
+  const code = 'customImageFilter(' + value_image + ', "' + dropdown_filter + '", ' + value_value + ');\n';
+  return code;
+}
+
+javascriptGenerator.forBlock['image_copy'] = function(block, generator) {
+  const value_image = generator.valueToCode(block, 'IMAGE', Order.ATOMIC);
+  const code = '(' + value_image + ').copy()';
+  return [code, Order.NONE];
+}
+
+javascriptGenerator.forBlock['graphics_disable_stroke'] = function() {
+  const code = 'noStroke();\n';
+  return code;
+}
+
+javascriptGenerator.forBlock['graphics_disable_fill'] = function() {
+  const code = 'noFill();\n';
+  return code;
+}
+
+javascriptGenerator.forBlock['input_canvas_width'] = function() {
+  const code = 'width';
+  return [code, Order.NONE];
+}
+
+javascriptGenerator.forBlock['input_canvas_height'] = function() {
+  const code = 'height';
+  return [code, Order.NONE];
+}
+
+javascriptGenerator.forBlock['input_resize_program'] = function(block, generator) {
+  const value_width = generator.valueToCode(block, 'WIDTH', Order.ATOMIC);
+  const value_height = generator.valueToCode(block, 'HEIGHT', Order.ATOMIC);
+  const code = 'resizeCanvas(' + value_width + ', ' + value_height + ');\n';
+  return code;
+}
+
+javascriptGenerator.forBlock['image_apply_css_filter'] = function(block, generator) {
+  const value_css = generator.valueToCode(block, 'CSS', Order.ATOMIC);
+  const value_image = generator.valueToCode(block, 'IMAGE', Order.ATOMIC);
+  const code = '(' + value_image + ').filter(' + value_css + ');\n';
+  return code;
+}
+
+javascriptGenerator.forBlock['graphics_set_font_family'] = function(block, generator) {
+  const value_family = generator.valueToCode(block, 'FAMILY', Order.ATOMIC);
+  const code = 'textFont(' + value_family + ');\n';
+  return code;
+}
+
+javascriptGenerator.forBlock['graphics_set_font_size'] = function(block, generator) {
+  const value_size = generator.valueToCode(block, 'SIZE', Order.ATOMIC);
+  const code = 'textSize(' + value_size + ');\n';
+  return code;
+}
+
+javascriptGenerator.forBlock['graphics_draw_text'] = function(block, generator) {
+  const value_text = generator.valueToCode(block, 'TEXT', Order.ATOMIC);
+  const value_x = generator.valueToCode(block, 'X', Order.ATOMIC);
+  const value_y = generator.valueToCode(block, 'Y', Order.ATOMIC);
+  const dropdown_h_align = block.getFieldValue('H_ALIGN');
+  const dropdown_v_align = block.getFieldValue('V_ALIGN');
+  const code = 'try{textAlign(' + dropdown_h_align + ', ' + dropdown_v_align + ');\ntextImage(' + value_text + ', ' + value_x + ', ' + value_y + ');\n}catch(e){}\n';
+  return code;
+}
+
+javascriptGenerator.forBlock['image_from_text'] = function(block, generator) {
+  const value_text = generator.valueToCode(block, 'TEXT', Order.ATOMIC);
+  const code = 'createTextImage(' + value_text + ')';
+  return [code, Order.NONE];
+}
+
+javascriptGenerator.forBlock['math_lerp'] = function(block, generator) {
+  const value_from = generator.valueToCode(block, 'FROM', Order.ATOMIC);
+  const value_to = generator.valueToCode(block, 'TO', Order.ATOMIC);
+  const value_with = generator.valueToCode(block, 'WITH', Order.ATOMIC);
+  const code = 'lerp(' + value_from + ', ' + value_to + ', ' + value_with + ')';
+  return [code, Order.NONE];
+}
+
+javascriptGenerator.forBlock['logic_chance'] = function(block, generator) {
+  const value_percent = generator.valueToCode(block, 'PERCENT', Order.ATOMIC);
+  const code = 'Math.random() < ' + value_percent + ' / 100';
+  return [code, Order.NONE];
+}
+
+javascriptGenerator.forBlock['graphics_rotate'] = function(block, generator) {
+  const value_degrees = generator.valueToCode(block, 'DEGREES', Order.ATOMIC);
+  const code = 'rotate(radians(' + value_degrees + '));\n';
+  return code;
+}
+
+javascriptGenerator.forBlock['graphics_skew'] = function(block, generator) {
+  const value_degrees = generator.valueToCode(block, 'DEGREES', Order.ATOMIC);
+  const dropdown_axis = block.getFieldValue('AXIS');
+  const code = 'shear' + dropdown_axis + '(radians(' + value_degrees + '));\n';
+  return code;
 }

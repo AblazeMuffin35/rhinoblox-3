@@ -778,6 +778,584 @@ const blocks = [
   ],
   "output": "Number",
   "colour": "#67743e"
+},
+{
+  "type": "image_from_url",
+  "tooltip": "",
+  "helpUrl": "",
+  "message0": "load image from URL %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "URL",
+      "check": "String"
+    }
+  ],
+  "output": "Image",
+  "colour": "#74503e"
+},
+{
+  "type": "graphics_draw_image",
+  "tooltip": "",
+  "helpUrl": "",
+  "message0": "draw image %1 image: %2 start x: %3 start y: %4 end x: %5 end y: %6",
+  "args0": [
+    {
+      "type": "input_dummy",
+      "name": "DUMMY"
+    },
+    {
+      "type": "input_value",
+      "name": "IMAGE",
+      "align": "RIGHT",
+      "check": "Image"
+    },
+    {
+      "type": "input_value",
+      "name": "X1",
+      "align": "RIGHT",
+      "check": "Number"
+    },
+    {
+      "type": "input_value",
+      "name": "Y1",
+      "align": "RIGHT",
+      "check": "Number"
+    },
+    {
+      "type": "input_value",
+      "name": "X2",
+      "align": "RIGHT",
+      "check": "Number"
+    },
+    {
+      "type": "input_value",
+      "name": "Y2",
+      "align": "RIGHT",
+      "check": "Number"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": "#74683e",
+  "inputsInline": false
+},
+{
+  "type": "image_new_image",
+  "tooltip": "",
+  "helpUrl": "",
+  "message0": "new image with %1 width: %2 height: %3",
+  "args0": [
+    {
+      "type": "input_dummy",
+      "name": "DUMMY"
+    },
+    {
+      "type": "input_value",
+      "name": "WIDTH",
+      "align": "RIGHT",
+      "check": "Number"
+    },
+    {
+      "type": "input_value",
+      "name": "HEIGHT",
+      "align": "RIGHT",
+      "check": "Number"
+    }
+  ],
+  "output": "Image",
+  "colour": "#74503e"
+},
+{
+  "type": "image_get_pixel",
+  "tooltip": "",
+  "helpUrl": "",
+  "message0": "get color of pixel %1 image: %2 x: %3 y: %4",
+  "args0": [
+    {
+      "type": "input_dummy",
+      "name": "DUMMY"
+    },
+    {
+      "type": "input_value",
+      "name": "IMAGE",
+      "align": "RIGHT",
+      "check": "Image"
+    },
+    {
+      "type": "input_value",
+      "name": "X",
+      "align": "RIGHT",
+      "check": "Number"
+    },
+    {
+      "type": "input_value",
+      "name": "Y",
+      "align": "RIGHT",
+      "check": "Number"
+    }
+  ],
+  "output": null,
+  "colour": "#74503e"
+},
+{
+  "type": "image_set_pixel",
+  "tooltip": "",
+  "helpUrl": "",
+  "message0": "set color of pixel %1 image: %2 x: %3 y: %4 color: %5",
+  "args0": [
+    {
+      "type": "input_dummy",
+      "name": "DUMMY"
+    },
+    {
+      "type": "input_value",
+      "name": "IMAGE",
+      "align": "RIGHT",
+      "check": "Image"
+    },
+    {
+      "type": "input_value",
+      "name": "X",
+      "align": "RIGHT",
+      "check": "Number"
+    },
+    {
+      "type": "input_value",
+      "name": "Y",
+      "align": "RIGHT",
+      "check": "Number"
+    },
+    {
+      "type": "input_value",
+      "name": "COLOR",
+      "align": "RIGHT"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": "#74503e"
+},
+{
+  "type": "image_apply_filter",
+  "tooltip": "",
+  "helpUrl": "",
+  "message0": "apply %1 filter with value %2 to image %3",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "FILTER",
+      "options": [
+        [
+          "blur",
+          "blur"
+        ],
+        [
+          "posterize",
+          "posterize"
+        ],
+        [
+          "threshold",
+          "threshold"
+        ],
+        [
+          "invert",
+          "invert"
+        ],
+        [
+          "hue rotate",
+          "hue-rotate"
+        ],
+        [
+          "brightness",
+          "brightness"
+        ],
+        [
+          "contrast",
+          "contrast"
+        ],
+        [
+          "sepia",
+          "sepia"
+        ],
+        [
+          "grayscale",
+          "grayscale"
+        ],
+        [
+          "saturate",
+          "saturate"
+        ],
+        [
+          "opacity",
+          "opacity"
+        ]
+      ]
+    },
+    {
+      "type": "input_value",
+      "name": "VALUE",
+      "check": "Number"
+    },
+    {
+      "type": "input_value",
+      "name": "IMAGE",
+      "check": "Image"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": "#74503e",
+  "inputsInline": true
+},
+{
+  "type": "image_copy",
+  "tooltip": "",
+  "helpUrl": "",
+  "message0": "copy of image %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "IMAGE",
+      "check": "Image"
+    }
+  ],
+  "output": "Image",
+  "colour": "#74503e"
+},
+{
+  "type": "graphics_disable_stroke",
+  "tooltip": "",
+  "helpUrl": "",
+  "message0": "disable stroke %1",
+  "args0": [
+    {
+      "type": "input_dummy",
+      "name": "DUMMY"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": "#74683e"
+},
+{
+  "type": "graphics_disable_fill",
+  "tooltip": "",
+  "helpUrl": "",
+  "message0": "disable fill %1",
+  "args0": [
+    {
+      "type": "input_dummy",
+      "name": "DUMMY"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": "#74683e"
+},
+{
+  "type": "input_canvas_width",
+  "tooltip": "",
+  "helpUrl": "",
+  "message0": "program width %1",
+  "args0": [
+    {
+      "type": "input_dummy",
+      "name": "DUMMY"
+    }
+  ],
+  "output": "Number",
+  "colour": "#67743e"
+},
+{
+  "type": "input_canvas_height",
+  "tooltip": "",
+  "helpUrl": "",
+  "message0": "program height %1",
+  "args0": [
+    {
+      "type": "input_dummy",
+      "name": "DUMMY"
+    }
+  ],
+  "output": "Number",
+  "colour": "#67743e"
+},
+{
+  "type": "input_resize_program",
+  "tooltip": "",
+  "helpUrl": "",
+  "message0": "resize program with %1 width: %2 height: %3",
+  "args0": [
+    {
+      "type": "input_dummy",
+      "name": "DUMMY"
+    },
+    {
+      "type": "input_value",
+      "name": "WIDTH",
+      "align": "RIGHT",
+      "check": "Number"
+    },
+    {
+      "type": "input_value",
+      "name": "HEIGHT",
+      "align": "RIGHT",
+      "check": "Number"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": "#67743e"
+},
+{
+  "type": "image_apply_css_filter",
+  "tooltip": "",
+  "helpUrl": "",
+  "message0": "apply custom CSS filter %1 to image %2",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "CSS",
+      "check": "String"
+    },
+    {
+      "type": "input_value",
+      "name": "IMAGE",
+      "check": "Image"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": "#74503e",
+  "inputsInline": true
+},
+{
+  "type": "graphics_set_font_family",
+  "tooltip": "",
+  "helpUrl": "",
+  "message0": "set font family to %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "FAMILY",
+      "check": "String"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": "#74683e",
+  "inputsInline": true
+},
+{
+  "type": "graphics_set_font_size",
+  "tooltip": "",
+  "helpUrl": "",
+  "message0": "set font size to %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "SIZE",
+      "check": "Number"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": "#74683e",
+  "inputsInline": true
+},
+{
+  "type": "graphics_draw_text",
+  "tooltip": "",
+  "helpUrl": "",
+  "message0": "draw text %1 text: %2 x: %3 y: %4 horizontal align: %5 %6 vertical align: %7 %8",
+  "args0": [
+    {
+      "type": "input_dummy",
+      "name": "DUMMY1"
+    },
+    {
+      "type": "input_value",
+      "name": "TEXT",
+      "align": "RIGHT",
+      "check": "String"
+    },
+    {
+      "type": "input_value",
+      "name": "X",
+      "align": "RIGHT",
+      "check": "Number"
+    },
+    {
+      "type": "input_value",
+      "name": "Y",
+      "align": "RIGHT",
+      "check": "Number"
+    },
+    {
+      "type": "field_dropdown",
+      "name": "H_ALIGN",
+      "options": [
+        [
+          "left",
+          "LEFT"
+        ],
+        [
+          "center",
+          "CENTER"
+        ],
+        [
+          "right",
+          "RIGHT"
+        ]
+      ]
+    },
+    {
+      "type": "input_dummy",
+      "name": "DUMMY2",
+      "align": "RIGHT"
+    },
+    {
+      "type": "field_dropdown",
+      "name": "V_ALIGN",
+      "options": [
+        [
+          "top",
+          "TOP"
+        ],
+        [
+          "baseline",
+          "BASELINE"
+        ],
+        [
+          "bottom",
+          "BOTTOM"
+        ]
+      ]
+    },
+    {
+      "type": "input_dummy",
+      "name": "DUMMY3",
+      "align": "RIGHT"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": "#74683e"
+},
+{
+  "type": "image_from_text",
+  "tooltip": "",
+  "helpUrl": "",
+  "message0": "new image from text %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "TEXT",
+      "check": "String"
+    }
+  ],
+  "output": "Image",
+  "colour": "#74503e"
+},
+{
+  "type": "math_lerp",
+  "tooltip": "",
+  "helpUrl": "",
+  "message0": "interpolate from %1 to %2 with %3",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "FROM",
+      "check": "Number"
+    },
+    {
+      "type": "input_value",
+      "name": "TO",
+      "check": "Number"
+    },
+    {
+      "type": "input_value",
+      "name": "WITH",
+      "check": "Number"
+    }
+  ],
+  "output": "Number",
+  "colour": "#304a80",
+  "inputsInline": true
+},
+{
+  "type": "logic_chance",
+  "tooltip": "",
+  "helpUrl": "",
+  "message0": "%1 % chance %2",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "PERCENT",
+      "check": "Number"
+    },
+    {
+      "type": "input_dummy",
+      "name": "DUMMY"
+    }
+  ],
+  "output": "Boolean",
+  "colour": "#265973",
+},
+{
+  "type": "graphics_rotate",
+  "tooltip": "",
+  "helpUrl": "",
+  "message0": "rotate graphics by %1 degrees %2",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "DEGREES",
+      "check": "Number"
+    },
+    {
+      "type": "input_dummy",
+      "name": "DUMMY"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": "#74683e"
+},
+{
+  "type": "graphics_skew",
+  "tooltip": "",
+  "helpUrl": "",
+  "message0": "skew graphics by %1 degrees along the %2 %3",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "DEGREES",
+      "check": "Number"
+    },
+    {
+      "type": "field_dropdown",
+      "name": "AXIS",
+      "options": [
+        [
+          "x-axis",
+          "X"
+        ],
+        [
+          "y-axis",
+          "Y"
+        ]
+      ]
+    },
+    {
+      "type": "input_dummy",
+      "name": "DUMMY"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": "#74683e"
 }
 ];
 

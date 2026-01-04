@@ -15,6 +15,7 @@ const rhinobloxDarkTheme = Blockly.Theme.defineTheme('rhinoblox_dark', {
       'scrollbarOpacity': 0.4,
       'cursorColour': '#d0d0d0',
       'blackBackground': '#333',
+      'selectedGlowColour': '#52c2e0',
     },
     'fontStyle': {
       'family': 'Rubik, sans-serif',
@@ -67,8 +68,11 @@ const rhinobloxDarkTheme = Blockly.Theme.defineTheme('rhinoblox_dark', {
       },
       'input_category': {
         'colour': '#67743e'
+      },
+      'image_category': {
+        'colour': '#74503e'
       }
     }
- });
+});
 
 export { rhinobloxDarkTheme };

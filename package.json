@@ -9,14 +9,18 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^7.1.2"
+    "vite": "^7.1.2",
+    "vite-plugin-monaco-editor": "^1.1.0",
+    "vite-plugin-monaco-editor-esm": "^2.0.2"
   },
   "dependencies": {
     "@blockly/field-colour": "^6.0.6",
     "@blockly/field-colour-hsv-sliders": "^6.0.6",
     "@blockly/workspace-minimap": "^0.3.3",
+    "@shikijs/monaco": "^3.20.0",
     "blockly": "^12.3.1",
-    "highlight.js": "^11.11.1",
-    "js-beautify": "^1.15.4"
+    "js-beautify": "^1.15.4",
+    "monaco-editor": "^0.55.1",
+    "shiki": "^3.20.0"
   }
 }
